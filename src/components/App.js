@@ -15,7 +15,6 @@ function App() {
       .then((data) => setBabies(data));
   }, []);
 
-  // console.log(babies)
 
   return (
     <div>

@@ -1,15 +1,15 @@
 import React from "react";
-import BabyLogList from "./BabyLogList";
-import BabyLogForm from "./BabyLogForm";
+import BabyList from "./BabyList";
+import BabyForm from "./BabyForm";
 
 function LogbookPage({ babies }) {
   const babylist = babies.map((baby) => (
-    <BabyLogList key={baby.id} baby={baby} />
+    <BabyList key={baby.id} baby={baby} />
   ));
 
   return (
     <div>
-      <BabyLogForm />
+      <BabyForm />
       {babylist}
     </div>
   );
