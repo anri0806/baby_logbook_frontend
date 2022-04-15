@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Route, Switch } from "react-router";
+import { Route, Routes } from "react-router-dom";
 
 import NavBar from "./NavBar";
 import Home from "./Home";
@@ -18,16 +18,13 @@ function App() {
   // console.log(babies)
 
   return (
-    <div className="App">
+    <div>
       <NavBar />
-      {/* <Switch> */}
-        {/* <Route exact path="/"> */}
-          <Home />
-        {/* </Route>
-        <Route path="/logbook"> */}
-          <LogbookPage />
-        {/* </Route> */}
-      {/* </Switch> */}
+
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/logbook" element={<LogbookPage babies={babies} />} />
+      </Routes>
     </div>
   );
 }
