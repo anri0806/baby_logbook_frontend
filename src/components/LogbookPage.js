@@ -3,9 +3,12 @@ import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
 
-function LogbookPage({ babies }) {
+function LogbookPage({ babies, onSubmitAdd, onSubmitAddBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [isSelected, setIsSelected] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+
+  //////////////// Show baby info on Click ///////////////
 
   function handleClick(babyId) {
     const selectedBaby = babies.find((baby) => baby.id === babyId);
@@ -13,11 +16,23 @@ function LogbookPage({ babies }) {
     setIsSelected(true);
   }
 
+  function handleShowForm() {
+    setShowForm((showForm) => !showForm);
+  }
+
+
+  /////////////////////////////////////////////////////////
+
   return (
-    <div>
-      <BabyForm />
+    <div style={{ textAlign: "center" }}>
+      <br />
+      <button onClick={handleShowForm}>+ Add Baby</button>
+      <br />
+      {showForm ? <BabyForm onSubmitAddBaby={onSubmitAddBaby} /> : null}
       <BabyList babies={babies} onClickRender={handleClick} />
-      {isSelected ? <BabyLog selectedBaby={selectedBaby} /> : null}
+      {isSelected ? (
+        <BabyLog selectedBaby={selectedBaby} onSubmitAdd={onSubmitAdd} />
+      ) : null}
     </div>
   );
 }

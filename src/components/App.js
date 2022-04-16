@@ -6,7 +6,6 @@ import NavBar from "./NavBar";
 import Home from "./Home";
 import LogbookPage from "./LogbookPage";
 
-
 function App() {
   const [babies, setBabies] = useState([]);
 
@@ -16,6 +15,21 @@ function App() {
       .then((data) => setBabies(data));
   }, []);
 
+  //////////////// Render new Baby on DOM ////////////////
+
+  function handleRenderBaby(newBaby) {
+    setBabies([...babies, newBaby]);
+  }
+
+  ////////////////// Render updated info /////////////////
+
+  //START FROM HERE - how to add nested data with POST
+
+  function handlePostRequest(addedData) {
+    // setBabies([...babies, [babies.milestones]: {addedData} ]);
+  }
+
+  //////////////////////////////////////////////////////////
 
   return (
     <div>
@@ -23,7 +37,16 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/logbook" element={<LogbookPage babies={babies} />} />
+        <Route
+          path="/logbook"
+          element={
+            <LogbookPage
+              babies={babies}
+              onSubmitAddBaby={handleRenderBaby}
+              onSubmitAdd={handlePostRequest}
+            />
+          }
+        />
       </Routes>
     </div>
   );
