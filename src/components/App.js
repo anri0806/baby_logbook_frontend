@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import Home from "./Home";
 import LogbookPage from "./LogbookPage";
 
+
 function App() {
   const [babies, setBabies] = useState([]);
 

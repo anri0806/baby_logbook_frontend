@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
+import BabyLog from "./BabyLog";
 
 function LogbookPage({ babies }) {
-  const babylist = babies.map((baby) => (
-    <BabyList key={baby.id} baby={baby} />
-  ));
+  const [selectedBaby, setSelectedBaby] = useState(null);
+  const [isSelected, setIsSelected] = useState(false);
+
+  function handleClick(babyId) {
+    const selectedBaby = babies.find((baby) => baby.id === babyId);
+    setSelectedBaby(selectedBaby);
+    setIsSelected(true);
+  }
 
   return (
     <div>
       <BabyForm />
-      {babylist}
+      <BabyList babies={babies} onClickRender={handleClick} />
+      {isSelected ? <BabyLog selectedBaby={selectedBaby} /> : null}
     </div>
   );
 }
