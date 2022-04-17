@@ -21,14 +21,6 @@ function App() {
     setBabies([...babies, newBaby]);
   }
 
-  ////////////////// Render updated info /////////////////
-
-  //START FROM HERE - how to add nested data with POST
-
-  function handlePostRequest(addedData) {
-    // setBabies([...babies, [babies.milestones]: {addedData} ]);
-  }
-
   //////////////////////////////////////////////////////////
 
   return (
@@ -40,11 +32,7 @@ function App() {
         <Route
           path="/logbook"
           element={
-            <LogbookPage
-              babies={babies}
-              onSubmitAddBaby={handleRenderBaby}
-              onSubmitAdd={handlePostRequest}
-            />
+            <LogbookPage babies={babies} onSubmitAddBaby={handleRenderBaby} />
           }
         />
       </Routes>
