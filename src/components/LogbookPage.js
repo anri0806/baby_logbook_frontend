@@ -73,7 +73,7 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     setSelectedBabyMiles(updatedMilestones);
   }
 
-  function handleDeleteMilestone(deletedMilestone) {
+  function handleDeleteMile(deletedMilestone) {
     const baby = babies.find((baby) => baby.id === deletedMilestone.baby_id);
     const updatedMilestones = baby.milestones.filter(
       (mile) => mile.id !== deletedMilestone.id
@@ -143,13 +143,13 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
           milestones={selectedBabyMiles}
           apps={selectedBabyApps}
           imms={selectedBabyImms}
-          onSubmitAddMiles={handlePostMile}
+          onSubmitAddMile={handlePostMile}
           onSubmitAddApp={handlePostApp}
           onSubmitAddImm={handlePostImm}
           onSubmitUpdateMile={handlePatchMile}
           onSubmitUpdateApp={handlePatchApp}
           onSubmitUpdateImm={handlePatchImm}
-          onClickDeleteMile={handleDeleteMilestone}
+          onClickDeleteMile={handleDeleteMile}
           onClickDeleteApp={handleDeleteApp}
           onClickDeleteImm={handleDeleteImm}
         />

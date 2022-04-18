@@ -6,12 +6,14 @@ function Appointment({ app, onSubmitUpdateApp, onClickDeleteApp }) {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [formData, setFormData] = useState({
     date: app.date,
-    time: moment.parseZone(app.time).format("LT").replace(/\s\w+M/, ''),
+    time: moment
+      .parseZone(app.time)
+      .format("HH:mm a")
+      .replace(/\s\w+m/, ""),
     doctor_name: app.doctor_name,
     notes: app.notes,
   });
 
- 
   // //////////////////// Toggle form ////////////////////
 
   function handleShowUpdateForm() {
@@ -50,12 +52,20 @@ function Appointment({ app, onSubmitUpdateApp, onClickDeleteApp }) {
       .then((deletedItem) => onClickDeleteApp(deletedItem));
   }
 
-  // //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+
+  //change input time format? & change parse format when render?
 
   return (
     <div>
       <p>{app.date}</p>
-      <p>{moment.parseZone(app.time).format("LT")}</p>
+      {/* Find a way to parse 1:00PM to 01:00PM */}
+      <p>
+        {moment
+          .parseZone(app.time)
+          .format("HH:mm a")
+          .replace(/\s\w+m/, "")}
+      </p>
       <p>{app.doctor_name}</p>
       <p>{app.notes}</p>
       <button onClick={handleShowUpdateForm}>✏</button>

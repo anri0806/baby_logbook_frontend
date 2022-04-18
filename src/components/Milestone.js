@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function Milestone({
   milestone,
-  onSubmitUpdateMiles,
+  onSubmitUpdateMile,
   onClickDeleteMile,
 }) {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
@@ -35,7 +35,7 @@ function Milestone({
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((updatedMilestone) => onSubmitUpdateMiles(updatedMilestone));
+      .then((updatedMilestone) => onSubmitUpdateMile(updatedMilestone));
 
     setShowUpdateForm((showUpdateForm) => !showUpdateForm);
   }

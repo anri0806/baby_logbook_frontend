@@ -15,9 +15,9 @@ function BabyLog({
   onSubmitUpdateMile,
   onSubmitUpdateApp,
   onSubmitUpdateImm,
-  onClickDeleteMiles,
+  onClickDeleteMile,
   onClickDeleteApp,
-  onClickDeleteImm
+  onClickDeleteImm,
 }) {
   const [showMileForm, setShowMileForm] = useState(false);
   const [showAppForm, setShowAppForm] = useState(false);
@@ -45,7 +45,7 @@ function BabyLog({
       key={milestone.id}
       milestone={milestone}
       onSubmitUpdateMile={onSubmitUpdateMile}
-      onClickDeleteMiles={onClickDeleteMiles}
+      onClickDeleteMile={onClickDeleteMile}
     />
   ));
 
