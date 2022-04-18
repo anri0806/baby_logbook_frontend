@@ -5,6 +5,11 @@ import Appointment from "./Appointment";
 import Immunization from "./Immunizations";
 
 // DO NOT use selectedBaby.id - how can i get access to current content id?
+// 1. Change backend post to babies/:id/milestones 
+//    so that i don't need to specify baby id
+
+
+// Check Woof Woof example for patch
 
 
 function BabyLog({
@@ -19,7 +24,6 @@ function BabyLog({
     development: "",
     notes: "",
     date: "",
-    baby_id: selectedBaby.id,
   });
 
   //////////// Iterate logs and render each component ////////////
@@ -49,7 +53,7 @@ function BabyLog({
   function handlePostRequest(e) {
     e.preventDefault();
 
-    fetch("http://localhost:9292/milestones", {
+    fetch(`http://localhost:9292/babies/${selectedBaby.id}/milestones`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

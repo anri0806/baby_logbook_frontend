@@ -5,25 +5,34 @@ import BabyLog from "./BabyLog";
 
 function LogbookPage({ babies, onSubmitAddBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
-  const [selectedBabyMileStone, setSelectedBabyMilestone] = useState(null);
-  const [selectedBabyAppointment, setSelectedBabyAppointment] = useState(null);
-  const [selectedBabyImmunization, setSelectedBabyImmunization] =
-    useState(null);
+  const [selectedBabyMileStone, setSelectedBabyMilestone] = useState([]);
 
   const [isSelected, setIsSelected] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
+// 2. Add get request for milestone?
+//    1. fetch request on handleClick in LogbookPage.js
+//    const miles = fetchedData.filter.....data.baby_id === babyId(clicked one) 
+//    then setMilestones(miles) <= array
+//    2. then iterate & render in milestone
+
 
   //////////// Store selected baby logs & Display them on Click ////////////
 
   function handleClick(babyId) {
     const baby = babies.find((baby) => baby.id === babyId);
-
     setSelectedBaby(baby);
-    setSelectedBabyMilestone(baby.milestones);
-    setSelectedBabyAppointment(baby.appointments);
-    setSelectedBabyImmunization(baby.immunizations);
-
     setIsSelected(true);
+
+    ///////////
+
+    fetch("http://localhost:9292/milestones")
+    .then((res) => res.json())
+    .then((milestones) => {
+      const selectedMilestones = milestones.filter((mile) => mile.baby_id === babyId)
+      setSelectedBabyMilestone(selectedMilestones)
+    });
+
   }
 
   function handleShowForm() {
