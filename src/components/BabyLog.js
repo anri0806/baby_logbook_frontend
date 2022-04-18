@@ -8,15 +8,20 @@ function BabyLog({
   selectedBaby,
   milestones,
   apps,
+  imms,
   onSubmitAddMile,
   onSubmitAddApp,
+  onSubmitAddImm,
   onSubmitUpdateMile,
   onSubmitUpdateApp,
+  onSubmitUpdateImm,
   onClickDeleteMiles,
   onClickDeleteApp,
+  onClickDeleteImm
 }) {
   const [showMileForm, setShowMileForm] = useState(false);
   const [showAppForm, setShowAppForm] = useState(false);
+  const [showImmForm, setShowImmForm] = useState(false);
   const [mileFormData, setMileFormData] = useState({
     development: "",
     notes: "",
@@ -27,6 +32,10 @@ function BabyLog({
     time: "",
     doctor_name: "",
     notes: "",
+  });
+  const [immFormData, setImmFormData] = useState({
+    vaccine: "",
+    date: "",
   });
 
   //////////// Iterate logs and render each component ////////////
@@ -49,6 +58,15 @@ function BabyLog({
     />
   ));
 
+  const babyImms = imms.map((imm) => (
+    <Immunization
+      key={imm.id}
+      imm={imm}
+      onSubmitUpdateImm={onSubmitUpdateImm}
+      onClickDeleteImm={onClickDeleteImm}
+    />
+  ));
+
   //////////////////// Toggle add form /////////////////////
 
   function handleShowMileForm() {
@@ -57,6 +75,10 @@ function BabyLog({
 
   function handleShowAppForm() {
     setShowAppForm((showAppForm) => !showAppForm);
+  }
+
+  function handleShowImmForm() {
+    setShowImmForm((showImmForm) => !showImmForm);
   }
 
   //////////////// Add new milestone ///////////////////
@@ -101,11 +123,30 @@ function BabyLog({
       .then((res) => res.json())
       .then((newApp) => onSubmitAddApp(newApp));
 
-    setAppFormData({ date: "",
-    time: "",
-    doctor_name: "",
-    notes: ""});
+    setAppFormData({ date: "", time: "", doctor_name: "", notes: "" });
     setShowAppForm((showAppForm) => !showAppForm);
+  }
+
+  //////////////// Add new immunization ///////////////////
+
+  function handleImmChange(e) {
+    setImmFormData({ ...immFormData, [e.target.name]: e.target.value });
+  }
+
+  function handleImmPostRequest(e) {
+    e.preventDefault();
+    fetch(`http://localhost:9292/babies/${selectedBaby.id}/immunizations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(immFormData),
+    })
+      .then((res) => res.json())
+      .then((newImm) => onSubmitAddImm(newImm));
+
+    setImmFormData({ vaccine: "", date: "" });
+    setShowImmForm((showImmForm) => !showImmForm);
   }
 
   //////////////////////////////////////////////////////////
@@ -175,7 +216,26 @@ function BabyLog({
       ) : null}
       {babyApps}
       <h4>Immunization</h4>
-      <Immunization />
+      <button onClick={handleShowImmForm}>+ Add Immunization</button>
+      {showImmForm ? (
+        <form onSubmit={handleImmPostRequest}>
+          <input
+            value={immFormData.vaccine}
+            onChange={handleImmChange}
+            type="text"
+            name="vaccine"
+            placeholder="Vaccine"
+          />
+          <input
+            value={immFormData.date}
+            onChange={handleImmChange}
+            type="date"
+            name="date"
+          />
+          <input type="submit" value="Add" />
+        </form>
+      ) : null}
+      {babyImms}
     </div>
   );
 }

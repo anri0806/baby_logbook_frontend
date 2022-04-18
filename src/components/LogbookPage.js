@@ -7,7 +7,7 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [selectedBabyMiles, setSelectedBabyMiles] = useState([]);
   const [selectedBabyApps, setSelectedBabyApps] = useState([]);
-
+  const [selectedBabyImms, setSelectedBabyImms] = useState([]);
   const [isSelected, setIsSelected] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
@@ -39,6 +39,17 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
         );
         setSelectedBabyApps(selectedApps);
       });
+
+    ////// GET immunization data //////
+
+    fetch("http://localhost:9292/immunizations")
+      .then((res) => res.json())
+      .then((immunizations) => {
+        const selectedImms = immunizations.filter(
+          (imm) => imm.baby_id === babyId
+        );
+        setSelectedBabyImms(selectedImms);
+      });
   }
 
   function handleShowForm() {
@@ -49,7 +60,7 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
 
   //////// Milestones ////////
 
-  function handlePostMile (newMilestone) {
+  function handlePostMile(newMilestone) {
     setSelectedBabyMiles([...selectedBabyMiles, newMilestone]);
   }
 
@@ -73,11 +84,9 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
 
   //////// Appointments ////////
 
-
-  function handlePostApp (newApp) {
-    setSelectedBabyApps ([...selectedBabyApps, newApp]);
+  function handlePostApp(newApp) {
+    setSelectedBabyApps([...selectedBabyApps, newApp]);
   }
-
 
   function handlePatchApp(updatedApp) {
     const baby = babies.find((baby) => baby.id === updatedApp.baby_id);
@@ -88,7 +97,6 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     setSelectedBabyApps(updatedApps);
   }
 
-
   function handleDeleteApp(deletedApp) {
     const baby = babies.find((baby) => baby.id === deletedApp.baby_id);
     const updatedApps = baby.appointments.filter(
@@ -97,6 +105,28 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     setSelectedBabyApps(updatedApps);
   }
 
+  //////// Immunizations ////////
+
+  function handlePostImm(newImm) {
+    setSelectedBabyImms([...selectedBabyImms, newImm]);
+  }
+
+  function handlePatchImm(updatedImm) {
+    const baby = babies.find((baby) => baby.id === updatedImm.baby_id);
+    const updatedImms = baby.immunizations.map((imm) =>
+      imm.id === updatedImm.id ? updatedImm : imm
+    );
+
+    setSelectedBabyImms(updatedImms);
+  }
+
+  function handleDeleteImm(deletedImm) {
+    const baby = babies.find((baby) => baby.id === deletedImm.baby_id);
+    const updatedImms = baby.immunizations.filter(
+      (imm) => imm.id !== deletedImm.id
+    );
+    setSelectedBabyImms(updatedImms);
+  }
 
   /////////////////////////////////////////////////////////
 
@@ -112,12 +142,16 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
           selectedBaby={selectedBaby}
           milestones={selectedBabyMiles}
           apps={selectedBabyApps}
+          imms={selectedBabyImms}
           onSubmitAddMiles={handlePostMile}
           onSubmitAddApp={handlePostApp}
+          onSubmitAddImm={handlePostImm}
           onSubmitUpdateMile={handlePatchMile}
           onSubmitUpdateApp={handlePatchApp}
+          onSubmitUpdateImm={handlePatchImm}
           onClickDeleteMile={handleDeleteMilestone}
           onClickDeleteApp={handleDeleteApp}
+          onClickDeleteImm={handleDeleteImm}
         />
       ) : null}
     </div>
