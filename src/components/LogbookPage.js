@@ -5,65 +5,98 @@ import BabyLog from "./BabyLog";
 
 function LogbookPage({ babies, onSubmitAddBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
-  const [selectedBabyMileStone, setSelectedBabyMilestone] = useState([]);
+  const [selectedBabyMiles, setSelectedBabyMiles] = useState([]);
+  const [selectedBabyApps, setSelectedBabyApps] = useState([]);
 
   const [isSelected, setIsSelected] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
-// 2. Add get request for milestone?
-//    1. fetch request on handleClick in LogbookPage.js
-//    const miles = fetchedData.filter.....data.baby_id === babyId(clicked one) 
-//    then setMilestones(miles) <= array
-//    2. then iterate & render in milestone
-
-
-  //////////// Store selected baby logs & Display them on Click ////////////
+  //////////// Store selected baby & its logs on Click ////////////
 
   function handleClick(babyId) {
     const baby = babies.find((baby) => baby.id === babyId);
     setSelectedBaby(baby);
     setIsSelected(true);
 
-    ///////////
+    ////// GET milestone data //////
 
     fetch("http://localhost:9292/milestones")
-    .then((res) => res.json())
-    .then((milestones) => {
-      const selectedMilestones = milestones.filter((mile) => mile.baby_id === babyId)
-      setSelectedBabyMilestone(selectedMilestones)
-    });
+      .then((res) => res.json())
+      .then((milestones) => {
+        const selectedMiles = milestones.filter(
+          (mile) => mile.baby_id === babyId
+        );
+        setSelectedBabyMiles(selectedMiles);
+      });
 
+    ////// GET appointment data //////
+
+    fetch("http://localhost:9292/appointments")
+      .then((res) => res.json())
+      .then((appointments) => {
+        const selectedApps = appointments.filter(
+          (app) => app.baby_id === babyId
+        );
+        setSelectedBabyApps(selectedApps);
+      });
   }
 
   function handleShowForm() {
     setShowForm((showForm) => !showForm);
   }
 
-  //////////////// Render new/updated/ w/o deleted milestone on DOM ///////////////
+  //////////////////// Render updated logs on DOM ///////////////////
 
-  function handlePostRequest(newMilestone) {
-    setSelectedBabyMilestone([...selectedBabyMileStone, newMilestone]);
+  //////// Milestones ////////
+
+  function handlePostMile (newMilestone) {
+    setSelectedBabyMiles([...selectedBabyMiles, newMilestone]);
   }
 
-
-  function handlePatchRequest(updatedMilestone) {
+  function handlePatchMile(updatedMilestone) {
     const baby = babies.find((baby) => baby.id === updatedMilestone.baby_id);
     const updatedMilestones = baby.milestones.map((mile) =>
       mile.id === updatedMilestone.id ? updatedMilestone : mile
     );
 
-    setSelectedBabyMilestone(updatedMilestones);
+    setSelectedBabyMiles(updatedMilestones);
   }
 
-
-  function handleDeleteRequest(deletedMilestone) {
+  function handleDeleteMilestone(deletedMilestone) {
     const baby = babies.find((baby) => baby.id === deletedMilestone.baby_id);
     const updatedMilestones = baby.milestones.filter(
       (mile) => mile.id !== deletedMilestone.id
     );
 
-    setSelectedBabyMilestone(updatedMilestones)
+    setSelectedBabyMiles(updatedMilestones);
   }
+
+  //////// Appointments ////////
+
+
+  function handlePostApp (newApp) {
+    setSelectedBabyApps ([...selectedBabyApps, newApp]);
+  }
+
+
+  function handlePatchApp(updatedApp) {
+    const baby = babies.find((baby) => baby.id === updatedApp.baby_id);
+    const updatedApps = baby.appointments.map((app) =>
+      app.id === updatedApp.id ? updatedApp : app
+    );
+
+    setSelectedBabyApps(updatedApps);
+  }
+
+
+  function handleDeleteApp(deletedApp) {
+    const baby = babies.find((baby) => baby.id === deletedApp.baby_id);
+    const updatedApps = baby.appointments.filter(
+      (app) => app.id !== deletedApp.id
+    );
+    setSelectedBabyApps(updatedApps);
+  }
+
 
   /////////////////////////////////////////////////////////
 
@@ -77,10 +110,14 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
       {isSelected ? (
         <BabyLog
           selectedBaby={selectedBaby}
-          milestones={selectedBabyMileStone}
-          onSubmitAddMiles={handlePostRequest}
-          onSubmitUpdateMiles={handlePatchRequest}
-          onClickDeleteMiles={handleDeleteRequest}
+          milestones={selectedBabyMiles}
+          apps={selectedBabyApps}
+          onSubmitAddMiles={handlePostMile}
+          onSubmitAddApp={handlePostApp}
+          onSubmitUpdateMile={handlePatchMile}
+          onSubmitUpdateApp={handlePatchApp}
+          onClickDeleteMile={handleDeleteMilestone}
+          onClickDeleteApp={handleDeleteApp}
         />
       ) : null}
     </div>

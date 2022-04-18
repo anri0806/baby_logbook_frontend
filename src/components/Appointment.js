@@ -1,24 +1,97 @@
-import React from "react"
+import React, { useState } from "react";
 
 var moment = require("moment");
 
-function Appointment({selectedBaby}) {
+function Appointment({ app, onSubmitUpdateApp, onClickDeleteApp }) {
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [formData, setFormData] = useState({
+    date: app.date,
+    time: moment.parseZone(app.time).format("LT").replace(/\s\w+M/, ''),
+    doctor_name: app.doctor_name,
+    notes: app.notes,
+  });
 
-    // const babyAppointments = selectedBaby.appointments.map((app) => (
-    //     <div key={app.id}>
-    //       <p>{app.date}</p>
-    //       <p>{moment.parseZone(app.time).format("LT")}</p>
-    //       <p>{app.doctor_name}</p>
-    //       <p>{app.notes}</p>
-    //       <br />
-    //     </div>
-    //   ));
+ 
+  // //////////////////// Toggle form ////////////////////
 
-    return (
-        <>
-        {/* {babyAppointments} */}
-        </>
-    )
+  function handleShowUpdateForm() {
+    setShowUpdateForm((showUpdateForm) => !showUpdateForm);
+  }
+
+  // //////////////// Update milestone ////////////////
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handlePatchRequest(e) {
+    e.preventDefault();
+
+    fetch(`http://localhost:9292/appointments/${app.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((updatedApp) => onSubmitUpdateApp(updatedApp));
+
+    setShowUpdateForm((showUpdateForm) => !showUpdateForm);
+  }
+
+  // ////////////////// Delete milestone /////////////////
+
+  function handleDelete() {
+    fetch(`http://localhost:9292/appointments/${app.id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((deletedItem) => onClickDeleteApp(deletedItem));
+  }
+
+  // //////////////////////////////////////////////////////////
+
+  return (
+    <div>
+      <p>{app.date}</p>
+      <p>{moment.parseZone(app.time).format("LT")}</p>
+      <p>{app.doctor_name}</p>
+      <p>{app.notes}</p>
+      <button onClick={handleShowUpdateForm}>✏</button>
+      <button onClick={handleDelete}>🗑</button>
+      {showUpdateForm ? (
+        <form onSubmit={handlePatchRequest}>
+          <input
+            value={formData.date}
+            onChange={handleChange}
+            type="date"
+            name="date"
+          />
+          <input
+            value={formData.time}
+            onChange={handleChange}
+            type="time"
+            name="time"
+          />
+          <input
+            value={formData.doctor_name}
+            onChange={handleChange}
+            type="text"
+            name="doctor_name"
+          />
+          <input
+            value={formData.notes}
+            onChange={handleChange}
+            type="text"
+            name="notes"
+          />
+          <input type="submit" value="Edit" />
+        </form>
+      ) : null}
+      <br />
+    </div>
+  );
 }
 
-export default Appointment
+export default Appointment;

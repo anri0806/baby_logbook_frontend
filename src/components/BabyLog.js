@@ -4,26 +4,29 @@ import Milestone from "./Milestone";
 import Appointment from "./Appointment";
 import Immunization from "./Immunizations";
 
-// DO NOT use selectedBaby.id - how can i get access to current content id?
-// 1. Change backend post to babies/:id/milestones 
-//    so that i don't need to specify baby id
-
-
-// Check Woof Woof example for patch
-
-
 function BabyLog({
   selectedBaby,
   milestones,
-  onSubmitAddMiles,
-  onSubmitUpdateMiles,
+  apps,
+  onSubmitAddMile,
+  onSubmitAddApp,
+  onSubmitUpdateMile,
+  onSubmitUpdateApp,
   onClickDeleteMiles,
+  onClickDeleteApp,
 }) {
-  const [showSubmitForm, setShowSubmitForm] = useState(false);
-  const [formData, setFormData] = useState({
+  const [showMileForm, setShowMileForm] = useState(false);
+  const [showAppForm, setShowAppForm] = useState(false);
+  const [mileFormData, setMileFormData] = useState({
     development: "",
     notes: "",
     date: "",
+  });
+  const [appFormData, setAppFormData] = useState({
+    date: "",
+    time: "",
+    doctor_name: "",
+    notes: "",
   });
 
   //////////// Iterate logs and render each component ////////////
@@ -31,26 +34,38 @@ function BabyLog({
   const babyMilestones = milestones.map((milestone) => (
     <Milestone
       key={milestone.id}
-      selectedBaby={selectedBaby}
       milestone={milestone}
-      onSubmitUpdateMiles={onSubmitUpdateMiles}
+      onSubmitUpdateMile={onSubmitUpdateMile}
       onClickDeleteMiles={onClickDeleteMiles}
     />
   ));
 
-  //////////////////// Toggle milestone form /////////////////////
+  const babyApps = apps.map((app) => (
+    <Appointment
+      key={app.id}
+      app={app}
+      onSubmitUpdateApp={onSubmitUpdateApp}
+      onClickDeleteApp={onClickDeleteApp}
+    />
+  ));
 
-  function handleShowSubmitForm() {
-    setShowSubmitForm((showSubmitForm) => !showSubmitForm);
+  //////////////////// Toggle add form /////////////////////
+
+  function handleShowMileForm() {
+    setShowMileForm((showMileForm) => !showMileForm);
+  }
+
+  function handleShowAppForm() {
+    setShowAppForm((showAppForm) => !showAppForm);
   }
 
   //////////////// Add new milestone ///////////////////
 
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  function handleMileChange(e) {
+    setMileFormData({ ...mileFormData, [e.target.name]: e.target.value });
   }
 
-  function handlePostRequest(e) {
+  function handleMilePostRequest(e) {
     e.preventDefault();
 
     fetch(`http://localhost:9292/babies/${selectedBaby.id}/milestones`, {
@@ -58,13 +73,39 @@ function BabyLog({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(mileFormData),
     })
       .then((res) => res.json())
-      .then((newMilestone) => onSubmitAddMiles(newMilestone));
+      .then((newMilestone) => onSubmitAddMile(newMilestone));
 
-    setFormData({ development: "", notes: "", date: "" });
-    setShowSubmitForm((showSubmitForm) => !showSubmitForm)
+    setMileFormData({ development: "", notes: "", date: "" });
+    setShowMileForm((showMileForm) => !showMileForm);
+  }
+
+  //////////////// Add new milestone ///////////////////
+
+  function handleAppChange(e) {
+    setAppFormData({ ...appFormData, [e.target.name]: e.target.value });
+  }
+
+  function handleAppPostRequest(e) {
+    e.preventDefault();
+
+    fetch(`http://localhost:9292/babies/${selectedBaby.id}/appointments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(appFormData),
+    })
+      .then((res) => res.json())
+      .then((newApp) => onSubmitAddApp(newApp));
+
+    setAppFormData({ date: "",
+    time: "",
+    doctor_name: "",
+    notes: ""});
+    setShowAppForm((showAppForm) => !showAppForm);
   }
 
   //////////////////////////////////////////////////////////
@@ -72,26 +113,26 @@ function BabyLog({
   return (
     <div>
       <h4>Milestones</h4>
-      <button onClick={handleShowSubmitForm}>+ Add Milestone</button>
-      {showSubmitForm ? (
-        <form onSubmit={handlePostRequest}>
+      <button onClick={handleShowMileForm}>+ Add Milestone</button>
+      {showMileForm ? (
+        <form onSubmit={handleMilePostRequest}>
           <input
-            value={formData.development}
-            onChange={handleChange}
+            value={mileFormData.development}
+            onChange={handleMileChange}
             type="text"
             name="development"
             placeholder="development"
           />
           <input
-            value={formData.notes}
-            onChange={handleChange}
+            value={mileFormData.notes}
+            onChange={handleMileChange}
             type="text"
             name="notes"
             placeholder="notes"
           />
           <input
-            value={formData.date}
-            onChange={handleChange}
+            value={mileFormData.date}
+            onChange={handleMileChange}
             type="date"
             name="date"
           />
@@ -100,7 +141,39 @@ function BabyLog({
       ) : null}
       {babyMilestones}
       <h4>Appointments</h4>
-      <Appointment />
+      <button onClick={handleShowAppForm}>+ Add Appointment</button>
+      {showAppForm ? (
+        <form onSubmit={handleAppPostRequest}>
+          <input
+            value={appFormData.date}
+            onChange={handleAppChange}
+            type="date"
+            name="date"
+          />
+          <input
+            value={appFormData.time}
+            onChange={handleAppChange}
+            type="time"
+            name="time"
+          />
+          <input
+            value={appFormData.doctor_name}
+            onChange={handleAppChange}
+            type="text"
+            name="doctor_name"
+            placeholder="Doctor name"
+          />
+          <input
+            value={appFormData.notes}
+            onChange={handleAppChange}
+            type="text"
+            name="notes"
+            placeholder="Notes"
+          />
+          <input type="submit" value="Add" />
+        </form>
+      ) : null}
+      {babyApps}
       <h4>Immunization</h4>
       <Immunization />
     </div>

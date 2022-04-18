@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
 function Milestone({
-  selectedBaby,
   milestone,
   onSubmitUpdateMiles,
-  onClickDeleteMiles,
+  onClickDeleteMile,
 }) {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -48,13 +47,13 @@ function Milestone({
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((deletedItem) => onClickDeleteMiles(deletedItem));
+      .then((deletedItem) => onClickDeleteMile(deletedItem));
   }
 
   //////////////////////////////////////////////////////////
 
   return (
-    <>
+    <div>
       <p>{milestone.development}</p>
       <p>{milestone.notes}</p> <p>{milestone.date}</p>
       <button onClick={handleShowUpdateForm}>✏</button>
@@ -76,14 +75,14 @@ function Milestone({
           <input
             value={formData.date}
             onChange={handleChange}
-            type="text"
+            type="date"
             name="date"
           />
           <input type="submit" value="Edit" />
         </form>
       ) : null}
       <br />
-    </>
+    </div>
   );
 }
 
