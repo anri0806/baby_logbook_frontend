@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, Tab } from "react-bootstrap";
+import { Tabs, Tab, Form, Row, Col, Button } from "react-bootstrap";
 
 import MilestoneContainer from "./MilestoneContainer";
 import AppointmentContainer from "./AppointmentContainer";
@@ -134,34 +134,58 @@ function BabyLog({
             milestones={milestones}
             onClickDeleteMile={onClickDeleteMile}
           />
-          <button className="add_button" onClick={handleShowMileForm}>
-            <i className="bi bi-plus-circle"></i>
-          </button>
           {showMileForm ? (
-            <form onSubmit={handleMilePostRequest}>
-              <input
-                value={mileFormData.date}
-                onChange={handleMileChange}
-                type="date"
-                name="date"
-              />
-              <input
-                value={mileFormData.development}
-                onChange={handleMileChange}
-                type="text"
-                name="development"
-                placeholder="development"
-              />
-              <input
-                value={mileFormData.notes}
-                onChange={handleMileChange}
-                type="text"
-                name="notes"
-                placeholder="notes"
-              />
-              <input type="submit" value="Add" />
-            </form>
-          ) : null}
+            <Form onSubmit={handleMilePostRequest}>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridDate">
+                  <Form.Control
+                    value={mileFormData.date}
+                    onChange={handleMileChange}
+                    type="date"
+                    name="date"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridDevelopment">
+                  <Form.Control
+                    value={mileFormData.development}
+                    onChange={handleMileChange}
+                    type="text"
+                    name="development"
+                    placeholder="Development"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridNotes">
+                  <Form.Control
+                    value={mileFormData.notes}
+                    onChange={handleMileChange}
+                    type="text"
+                    name="notes"
+                    placeholder="Notes"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridSubmit">
+                  <style type="text/css">
+                    {`
+              .btn-flat {
+                background-color: #f1b988;
+                color: white;
+              }
+              `}
+                  </style>
+                  <Button variant="flat" type="submit" value="Add">
+                    Add
+                  </Button>
+                </Form.Group>
+              </Row>
+            </Form>
+          ) : (
+            <button className="add_button" onClick={handleShowMileForm}>
+              <i className="bi bi-plus-circle"></i>
+            </button>
+          )}
         </Tab>
 
         <Tab eventKey="appointments" title="Appointments">
@@ -169,67 +193,115 @@ function BabyLog({
             appointments={apps}
             onClickDeleteApp={onClickDeleteApp}
           />
-          <button className="add_button" onClick={handleShowAppForm}>
-            <i className="bi bi-plus-circle"></i>
-          </button>
           {showAppForm ? (
-            <form onSubmit={handleAppPostRequest}>
-              <input
-                value={appFormData.date}
-                onChange={handleAppChange}
-                type="date"
-                name="date"
-              />
-              <input
-                value={appFormData.time}
-                onChange={handleAppChange}
-                type="time"
-                name="time"
-              />
-              <input
-                value={appFormData.doctor_name}
-                onChange={handleAppChange}
-                type="text"
-                name="doctor_name"
-                placeholder="Doctor name"
-              />
-              <input
-                value={appFormData.notes}
-                onChange={handleAppChange}
-                type="text"
-                name="notes"
-                placeholder="Notes"
-              />
-              <input type="submit" value="Add" />
-            </form>
-          ) : null}
+            <Form onSubmit={handleAppPostRequest}>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridDate">
+                  <Form.Control
+                    value={appFormData.date}
+                    onChange={handleAppChange}
+                    type="date"
+                    name="date"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridTime">
+                  <Form.Control
+                    value={appFormData.time}
+                    onChange={handleAppChange}
+                    type="time"
+                    name="time"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridDoctorName">
+                  <Form.Control
+                    value={appFormData.doctor_name}
+                    onChange={handleAppChange}
+                    type="text"
+                    name="doctor_name"
+                    placeholder="Doctor name"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridNotes">
+                  <Form.Control
+                    value={appFormData.notes}
+                    onChange={handleAppChange}
+                    type="text"
+                    name="notes"
+                    placeholder="Notes"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridSubmit">
+                  <style type="text/css">
+                    {`
+              .btn-flat {
+                background-color: #f1b988;
+                color: white;
+              }
+              `}
+                  </style>
+                  <Button variant="flat" type="submit" value="Add">
+                    Add
+                  </Button>
+                </Form.Group>
+              </Row>
+            </Form>
+          ) : (
+            <button className="add_button" onClick={handleShowAppForm}>
+              <i className="bi bi-plus-circle"></i>
+            </button>
+          )}
         </Tab>
         <Tab eventKey="immunizations" title="Immunizations">
           <ImmuContainer
             immunizations={imms}
             onClickDeleteImm={onClickDeleteImm}
           />
-          <button className="add_button" onClick={handleShowImmForm}>
-            <i className="bi bi-plus-circle"></i>
-          </button>
           {showImmForm ? (
-            <form onSubmit={handleImmPostRequest}>
-              <input
-                value={immFormData.vaccine}
-                onChange={handleImmChange}
-                type="text"
-                name="vaccine"
-                placeholder="Vaccine"
-              />
-              <input
-                value={immFormData.date}
-                onChange={handleImmChange}
-                type="date"
-                name="date"
-              />
-              <input type="submit" value="Add" />
-            </form>
-          ) : null}
+            <Form onSubmit={handleImmPostRequest}>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridDate">
+                  <Form.Control
+                    value={immFormData.date}
+                    onChange={handleImmChange}
+                    type="date"
+                    name="date"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridVaccine">
+                  <Form.Control
+                    value={immFormData.vaccine}
+                    onChange={handleImmChange}
+                    type="text"
+                    name="vaccine"
+                    placeholder="Vaccine"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridSubmit">
+                  <style type="text/css">
+                    {`
+                      .btn-flat {
+                       background-color: #f1b988;
+                       color: white;
+                      }
+                   `}
+                  </style>
+                  <Button variant="flat" type="submit" value="Add">
+                    Add
+                  </Button>
+                </Form.Group>
+              </Row>
+            </Form>
+          ) : (
+            <button className="add_button" onClick={handleShowImmForm}>
+              <i className="bi bi-plus-circle"></i>
+            </button>
+          )}
         </Tab>
       </Tabs>
     </div>

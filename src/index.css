@@ -76,7 +76,7 @@ code {
   display: inline-block;
 }
 
-.log_button {
+.delete_button {
   all: unset;
   font-size: 20px;
 }

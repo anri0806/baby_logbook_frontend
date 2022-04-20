@@ -23,7 +23,7 @@ function Immunization({ imm, onClickDeleteImm }) {
           <p>{imm.vaccine}</p>
         </td>
         <td>
-          <button className="log_button" onClick={handleDelete}>
+          <button className="delete_button" onClick={handleDelete}>
             <i className="bi bi-trash"></i>
           </button>
         </td>

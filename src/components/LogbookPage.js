@@ -3,7 +3,6 @@ import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
 
-
 function LogbookPage({ babies, onSubmitAddBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [selectedBabyMiles, setSelectedBabyMiles] = useState([]);
@@ -34,9 +33,10 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     fetch("http://localhost:9292/milestones")
       .then((res) => res.json())
       .then((milestones) => {
-        const selectedMiles = milestones.filter(
-          (mile) => mile.baby_id === babyId
-        );
+        const selectedMiles = milestones
+          .filter((mile) => mile.baby_id === babyId)
+          .sort((a, b) => a.date.localeCompare(b.date));
+
         setSelectedBabyMiles(selectedMiles);
       });
 
@@ -45,9 +45,10 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     fetch("http://localhost:9292/appointments")
       .then((res) => res.json())
       .then((appointments) => {
-        const selectedApps = appointments.filter(
-          (app) => app.baby_id === babyId
-        );
+        const selectedApps = appointments
+          .filter((app) => app.baby_id === babyId)
+          .sort((a, b) => a.date.localeCompare(b.date));
+
         setSelectedBabyApps(selectedApps);
       });
 
@@ -56,13 +57,13 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     fetch("http://localhost:9292/immunizations")
       .then((res) => res.json())
       .then((immunizations) => {
-        const selectedImms = immunizations.filter(
-          (imm) => imm.baby_id === babyId
-        );
+        const selectedImms = immunizations
+          .filter((imm) => imm.baby_id === babyId)
+          .sort((a, b) => a.date.localeCompare(b.date));
+          
         setSelectedBabyImms(selectedImms);
       });
   }
-
 
   //////// Milestones ////////
 
