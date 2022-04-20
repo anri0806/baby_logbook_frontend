@@ -4,9 +4,6 @@ import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
 
 
-// 2. Create Table for milestones, appointments, immunizations
-// 3. Search adjust picture shape
-
 function LogbookPage({ babies, onSubmitAddBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [selectedBabyMiles, setSelectedBabyMiles] = useState([]);
@@ -66,21 +63,11 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
       });
   }
 
-  //////////////////// Render updated logs on DOM ///////////////////
 
   //////// Milestones ////////
 
   function handlePostMile(newMilestone) {
     setSelectedBabyMiles([...selectedBabyMiles, newMilestone]);
-  }
-
-  function handlePatchMile(updatedMilestone) {
-    const baby = babies.find((baby) => baby.id === updatedMilestone.baby_id);
-    const updatedMilestones = baby.milestones.map((mile) =>
-      mile.id === updatedMilestone.id ? updatedMilestone : mile
-    );
-
-    setSelectedBabyMiles(updatedMilestones);
   }
 
   function handleDeleteMile(deletedMilestone) {
@@ -98,15 +85,6 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     setSelectedBabyApps([...selectedBabyApps, newApp]);
   }
 
-  function handlePatchApp(updatedApp) {
-    const baby = babies.find((baby) => baby.id === updatedApp.baby_id);
-    const updatedApps = baby.appointments.map((app) =>
-      app.id === updatedApp.id ? updatedApp : app
-    );
-
-    setSelectedBabyApps(updatedApps);
-  }
-
   function handleDeleteApp(deletedApp) {
     const baby = babies.find((baby) => baby.id === deletedApp.baby_id);
     const updatedApps = baby.appointments.filter(
@@ -119,15 +97,6 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
 
   function handlePostImm(newImm) {
     setSelectedBabyImms([...selectedBabyImms, newImm]);
-  }
-
-  function handlePatchImm(updatedImm) {
-    const baby = babies.find((baby) => baby.id === updatedImm.baby_id);
-    const updatedImms = baby.immunizations.map((imm) =>
-      imm.id === updatedImm.id ? updatedImm : imm
-    );
-
-    setSelectedBabyImms(updatedImms);
   }
 
   function handleDeleteImm(deletedImm) {
@@ -174,9 +143,6 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
           onSubmitAddMile={handlePostMile}
           onSubmitAddApp={handlePostApp}
           onSubmitAddImm={handlePostImm}
-          onSubmitUpdateMile={handlePatchMile}
-          onSubmitUpdateApp={handlePatchApp}
-          onSubmitUpdateImm={handlePatchImm}
           onClickDeleteMile={handleDeleteMile}
           onClickDeleteApp={handleDeleteApp}
           onClickDeleteImm={handleDeleteImm}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Sonnet } from "react-bootstrap";
+import { Tabs, Tab } from "react-bootstrap";
 
-import Milestone from "./Milestone";
-import Appointment from "./Appointment";
-import Immunization from "./Immunizations";
+import MilestoneContainer from "./MilestoneContainer";
+import AppointmentContainer from "./AppointmentContainer";
+import ImmuContainer from "./ImmuContainer";
 
 function BabyLog({
   selectedBaby,
@@ -13,9 +13,6 @@ function BabyLog({
   onSubmitAddMile,
   onSubmitAddApp,
   onSubmitAddImm,
-  onSubmitUpdateMile,
-  onSubmitUpdateApp,
-  onSubmitUpdateImm,
   onClickDeleteMile,
   onClickDeleteApp,
   onClickDeleteImm,
@@ -40,36 +37,7 @@ function BabyLog({
     date: "",
   });
 
-  //////////// Iterate logs and render each component ////////////
-
-  const babyMilestones = milestones.map((milestone) => (
-    <Milestone
-      key={milestone.id}
-      milestone={milestone}
-      onSubmitUpdateMile={onSubmitUpdateMile}
-      onClickDeleteMile={onClickDeleteMile}
-    />
-  ));
-
-  const babyApps = apps.map((app) => (
-    <Appointment
-      key={app.id}
-      app={app}
-      onSubmitUpdateApp={onSubmitUpdateApp}
-      onClickDeleteApp={onClickDeleteApp}
-    />
-  ));
-
-  const babyImms = imms.map((imm) => (
-    <Immunization
-      key={imm.id}
-      imm={imm}
-      onSubmitUpdateImm={onSubmitUpdateImm}
-      onClickDeleteImm={onClickDeleteImm}
-    />
-  ));
-
-  //////////////////// Toggle add form /////////////////////
+  //////////////////// Toggle ADD form /////////////////////
 
   function handleShowMileForm() {
     setShowMileForm((showMileForm) => !showMileForm);
@@ -106,7 +74,7 @@ function BabyLog({
     setShowMileForm((showMileForm) => !showMileForm);
   }
 
-  //////////////// Add new milestone ///////////////////
+  //////////////// Add new appointment ///////////////////
 
   function handleAppChange(e) {
     setAppFormData({ ...appFormData, [e.target.name]: e.target.value });
@@ -161,14 +129,22 @@ function BabyLog({
         onSelect={(k) => setKey(k)}
         className="mb-3"
       >
-        <Tab
-          eventKey="milestones"
-          title="Milestones"
-        >
-          <h4>Milestones</h4>
-          <button onClick={handleShowMileForm}>+ Add Milestone</button>
+        <Tab eventKey="milestones" title="Milestones">
+          <MilestoneContainer
+            milestones={milestones}
+            onClickDeleteMile={onClickDeleteMile}
+          />
+          <button className="add_button" onClick={handleShowMileForm}>
+            <i className="bi bi-plus-circle"></i>
+          </button>
           {showMileForm ? (
             <form onSubmit={handleMilePostRequest}>
+              <input
+                value={mileFormData.date}
+                onChange={handleMileChange}
+                type="date"
+                name="date"
+              />
               <input
                 value={mileFormData.development}
                 onChange={handleMileChange}
@@ -183,21 +159,19 @@ function BabyLog({
                 name="notes"
                 placeholder="notes"
               />
-              <input
-                value={mileFormData.date}
-                onChange={handleMileChange}
-                type="date"
-                name="date"
-              />
               <input type="submit" value="Add" />
             </form>
           ) : null}
-          {babyMilestones}
         </Tab>
 
         <Tab eventKey="appointments" title="Appointments">
-          <h4>Appointments</h4>
-          <button onClick={handleShowAppForm}>+ Add Appointment</button>
+          <AppointmentContainer
+            appointments={apps}
+            onClickDeleteApp={onClickDeleteApp}
+          />
+          <button className="add_button" onClick={handleShowAppForm}>
+            <i className="bi bi-plus-circle"></i>
+          </button>
           {showAppForm ? (
             <form onSubmit={handleAppPostRequest}>
               <input
@@ -229,31 +203,33 @@ function BabyLog({
               <input type="submit" value="Add" />
             </form>
           ) : null}
-          {babyApps}
         </Tab>
-        <button onClick={handleShowImmForm}>+ Add Immunization</button>
-        {showImmForm ? (
-          <form onSubmit={handleImmPostRequest}>
-            <input
-              value={immFormData.vaccine}
-              onChange={handleImmChange}
-              type="text"
-              name="vaccine"
-              placeholder="Vaccine"
-            />
-            <input
-              value={immFormData.date}
-              onChange={handleImmChange}
-              type="date"
-              name="date"
-            />
-            <input type="submit" value="Add" />
-          </form>
-        ) : null}
-
         <Tab eventKey="immunizations" title="Immunizations">
-          <h4>Immunizations</h4>
-          {babyImms}
+          <ImmuContainer
+            immunizations={imms}
+            onClickDeleteImm={onClickDeleteImm}
+          />
+          <button className="add_button" onClick={handleShowImmForm}>
+            <i className="bi bi-plus-circle"></i>
+          </button>
+          {showImmForm ? (
+            <form onSubmit={handleImmPostRequest}>
+              <input
+                value={immFormData.vaccine}
+                onChange={handleImmChange}
+                type="text"
+                name="vaccine"
+                placeholder="Vaccine"
+              />
+              <input
+                value={immFormData.date}
+                onChange={handleImmChange}
+                type="date"
+                name="date"
+              />
+              <input type="submit" value="Add" />
+            </form>
+          ) : null}
         </Tab>
       </Tabs>
     </div>

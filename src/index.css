@@ -62,10 +62,28 @@ code {
 }
 
 .log_page {
-  width: 80%;
+  width: 70%;
   margin: auto;
-  /* background: rgba(251, 251, 251, 0.829)   */
+  background: rgba(251, 251, 251, 0.829);
   border: 2px solid white;
-  padding: 10px;
-  border-radius: 25px;
+  padding: 30px;
+  border-radius: 18px;
+}
+
+.divider {
+  width: 5px;
+  height: auto;
+  display: inline-block;
+}
+
+.log_button {
+  all: unset;
+  font-size: 20px;
+}
+
+.add_button {
+  all: unset;
+  padding-right: 90%;
+  padding-top: 0;
+  font-size: 22px;
 }

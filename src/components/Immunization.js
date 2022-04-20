@@ -1,30 +1,26 @@
 import React from "react";
 
-function Milestone({ milestone, onClickDeleteMile }) {
-
-
+function Immunization({ imm, onClickDeleteImm }) {
   ////////////////// Delete milestone /////////////////
 
   function handleDelete() {
-    fetch(`http://localhost:9292/milestones/${milestone.id}`, {
+    fetch(`http://localhost:9292/immunizations/${imm.id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((deletedItem) => onClickDeleteMile(deletedItem));
+      .then((deletedItem) => onClickDeleteImm(deletedItem));
   }
 
+  //////////////////////////////////////////////////////////
 
   return (
     <>
       <tr>
         <td>
-          <p>{milestone.date}</p>
+          <p>{imm.date}</p>
         </td>
         <td>
-          <p>{milestone.development}</p>
-        </td>
-        <td>
-          <p>{milestone.notes}</p>
+          <p>{imm.vaccine}</p>
         </td>
         <td>
           <button className="log_button" onClick={handleDelete}>
@@ -36,4 +32,4 @@ function Milestone({ milestone, onClickDeleteMile }) {
   );
 }
 
-export default Milestone;
+export default Immunization;
