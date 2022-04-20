@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Tabs, Tab, Sonnet } from "react-bootstrap";
 
 import Milestone from "./Milestone";
 import Appointment from "./Appointment";
@@ -19,6 +20,7 @@ function BabyLog({
   onClickDeleteApp,
   onClickDeleteImm,
 }) {
+  const [key, setKey] = useState("milestones");
   const [showMileForm, setShowMileForm] = useState(false);
   const [showAppForm, setShowAppForm] = useState(false);
   const [showImmForm, setShowImmForm] = useState(false);
@@ -152,90 +154,108 @@ function BabyLog({
   //////////////////////////////////////////////////////////
 
   return (
-    <div>
-      <h4>Milestones</h4>
-      <button onClick={handleShowMileForm}>+ Add Milestone</button>
-      {showMileForm ? (
-        <form onSubmit={handleMilePostRequest}>
-          <input
-            value={mileFormData.development}
-            onChange={handleMileChange}
-            type="text"
-            name="development"
-            placeholder="development"
-          />
-          <input
-            value={mileFormData.notes}
-            onChange={handleMileChange}
-            type="text"
-            name="notes"
-            placeholder="notes"
-          />
-          <input
-            value={mileFormData.date}
-            onChange={handleMileChange}
-            type="date"
-            name="date"
-          />
-          <input type="submit" value="Add" />
-        </form>
-      ) : null}
-      {babyMilestones}
-      <h4>Appointments</h4>
-      <button onClick={handleShowAppForm}>+ Add Appointment</button>
-      {showAppForm ? (
-        <form onSubmit={handleAppPostRequest}>
-          <input
-            value={appFormData.date}
-            onChange={handleAppChange}
-            type="date"
-            name="date"
-          />
-          <input
-            value={appFormData.time}
-            onChange={handleAppChange}
-            type="time"
-            name="time"
-          />
-          <input
-            value={appFormData.doctor_name}
-            onChange={handleAppChange}
-            type="text"
-            name="doctor_name"
-            placeholder="Doctor name"
-          />
-          <input
-            value={appFormData.notes}
-            onChange={handleAppChange}
-            type="text"
-            name="notes"
-            placeholder="Notes"
-          />
-          <input type="submit" value="Add" />
-        </form>
-      ) : null}
-      {babyApps}
-      <h4>Immunization</h4>
-      <button onClick={handleShowImmForm}>+ Add Immunization</button>
-      {showImmForm ? (
-        <form onSubmit={handleImmPostRequest}>
-          <input
-            value={immFormData.vaccine}
-            onChange={handleImmChange}
-            type="text"
-            name="vaccine"
-            placeholder="Vaccine"
-          />
-          <input
-            value={immFormData.date}
-            onChange={handleImmChange}
-            type="date"
-            name="date"
-          />
-          <input type="submit" value="Add" />
-        </form>
-      ) : null}
-      {babyImms}
+    <div className="log_page">
+      <Tabs
+        id="controlled-tab-example"
+        activeKey={key}
+        onSelect={(k) => setKey(k)}
+        className="mb-3"
+      >
+        <Tab
+          eventKey="milestones"
+          title="Milestones"
+        >
+          <h4>Milestones</h4>
+          <button onClick={handleShowMileForm}>+ Add Milestone</button>
+          {showMileForm ? (
+            <form onSubmit={handleMilePostRequest}>
+              <input
+                value={mileFormData.development}
+                onChange={handleMileChange}
+                type="text"
+                name="development"
+                placeholder="development"
+              />
+              <input
+                value={mileFormData.notes}
+                onChange={handleMileChange}
+                type="text"
+                name="notes"
+                placeholder="notes"
+              />
+              <input
+                value={mileFormData.date}
+                onChange={handleMileChange}
+                type="date"
+                name="date"
+              />
+              <input type="submit" value="Add" />
+            </form>
+          ) : null}
+          {babyMilestones}
+        </Tab>
+
+        <Tab eventKey="appointments" title="Appointments">
+          <h4>Appointments</h4>
+          <button onClick={handleShowAppForm}>+ Add Appointment</button>
+          {showAppForm ? (
+            <form onSubmit={handleAppPostRequest}>
+              <input
+                value={appFormData.date}
+                onChange={handleAppChange}
+                type="date"
+                name="date"
+              />
+              <input
+                value={appFormData.time}
+                onChange={handleAppChange}
+                type="time"
+                name="time"
+              />
+              <input
+                value={appFormData.doctor_name}
+                onChange={handleAppChange}
+                type="text"
+                name="doctor_name"
+                placeholder="Doctor name"
+              />
+              <input
+                value={appFormData.notes}
+                onChange={handleAppChange}
+                type="text"
+                name="notes"
+                placeholder="Notes"
+              />
+              <input type="submit" value="Add" />
+            </form>
+          ) : null}
+          {babyApps}
+        </Tab>
+        <button onClick={handleShowImmForm}>+ Add Immunization</button>
+        {showImmForm ? (
+          <form onSubmit={handleImmPostRequest}>
+            <input
+              value={immFormData.vaccine}
+              onChange={handleImmChange}
+              type="text"
+              name="vaccine"
+              placeholder="Vaccine"
+            />
+            <input
+              value={immFormData.date}
+              onChange={handleImmChange}
+              type="date"
+              name="date"
+            />
+            <input type="submit" value="Add" />
+          </form>
+        ) : null}
+
+        <Tab eventKey="immunizations" title="Immunizations">
+          <h4>Immunizations</h4>
+          {babyImms}
+        </Tab>
+      </Tabs>
     </div>
   );
 }

@@ -3,6 +3,10 @@ import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
 
+
+// 2. Create Table for milestones, appointments, immunizations
+// 3. Search adjust picture shape
+
 function LogbookPage({ babies, onSubmitAddBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [selectedBabyMiles, setSelectedBabyMiles] = useState([]);
@@ -10,6 +14,16 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
   const [selectedBabyImms, setSelectedBabyImms] = useState([]);
   const [isSelected, setIsSelected] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
+  //////////// Show/ Close form on Click ////////////
+
+  function handleShowForm() {
+    setShowForm((showForm) => !showForm);
+  }
+
+  function handleCloseForm() {
+    setShowForm(false);
+  }
 
   //////////// Store selected baby & its logs on Click ////////////
 
@@ -50,10 +64,6 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
         );
         setSelectedBabyImms(selectedImms);
       });
-  }
-
-  function handleShowForm() {
-    setShowForm((showForm) => !showForm);
   }
 
   //////////////////// Render updated logs on DOM ///////////////////
@@ -133,9 +143,27 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
   return (
     <div style={{ textAlign: "center" }}>
       <br />
-      <button onClick={handleShowForm}>+ Add Baby</button>
+      <p
+        style={{
+          textAlign: "right",
+          marginRight: "30px",
+          fontSize: "30px",
+          color: "#B86F27",
+        }}
+      >
+        <i
+          style={{ cursor: "pointer" }}
+          className="bi bi-plus-circle-fill"
+          onClick={handleShowForm}
+        ></i>
+      </p>
       <br />
-      {showForm ? <BabyForm onSubmitAddBaby={onSubmitAddBaby} /> : null}
+      {showForm ? (
+        <BabyForm
+          onSubmitAddBaby={onSubmitAddBaby}
+          onClickClose={handleCloseForm}
+        />
+      ) : null}
       <BabyList babies={babies} onClickRender={handleClick} />
       {isSelected ? (
         <BabyLog

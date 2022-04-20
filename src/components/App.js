@@ -25,8 +25,6 @@ function App() {
 
   return (
     <div>
-      <NavBar />
-
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route
@@ -36,6 +34,7 @@ function App() {
           }
         />
       </Routes>
+      <NavBar />
     </div>
   );
 }

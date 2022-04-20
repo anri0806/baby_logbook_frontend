@@ -1,17 +1,16 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  width: 100%;
+  text-size-adjust: auto;
+  font-family: "Chivo", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #474747;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: "Chivo", sans-serif;
 }
-
 
 /**** BACKGROUND IMAGE ****/
 .wrap {
@@ -25,14 +24,48 @@ code {
   top: 0;
   width: 100%;
   height: 100%;
-  /* opacity: 0.8; */
   background-image: url("../images/background_img.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  /* filter: grayscale(50%); */
 }
 
 .content {
   position: relative;
+}
+
+.popup_box {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.box {
+  position: relative;
+  width: 40%;
+  min-height: 300px;
+  background-color: white;
+  opacity: 0.9;
+  margin: 40px auto;
+  padding: 5px 10px 20px;
+  color: #e18b41;
+}
+
+.close_button {
+  text-align: right;
+  color: #f1b988;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.log_page {
+  width: 80%;
+  margin: auto;
+  /* background: rgba(251, 251, 251, 0.829)   */
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 25px;
 }

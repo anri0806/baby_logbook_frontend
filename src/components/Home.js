@@ -2,10 +2,19 @@ import React from "react";
 
 function Home() {
   return (
-    <>
-      <h1>Baby Logbook</h1>
-      <h2>Your baby's milestone and daily records</h2>
-    </>
+    <div style={{ textAlign: "center", margin: "18%" }}>
+      <h1
+        style={{
+          fontFamily: "Playfair Display, serif",
+          fontSize: "100px",
+        }}
+      >
+        Baby Logbook
+      </h1>
+      <p style={{ fontSize: "30px" }}>
+        Your baby's milestone and daily records
+      </p>
+    </div>
   );
 }
 
