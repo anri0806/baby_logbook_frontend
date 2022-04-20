@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Container } from "react-bootstrap";
+import { Form, Container, Button } from "react-bootstrap";
 
 function BabyForm({ onSubmitAddBaby, onClickClose }) {
   const [formData, setFormData] = useState({
@@ -63,7 +63,7 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
               />
             </Form.Group>
             <br />
-            <Form.Group style={{textAlign: "left", fontSize: "15px"}}>
+            <Form.Group style={{ textAlign: "left", fontSize: "15px" }}>
               <Form.Label>Birth date:</Form.Label>
               <Form.Control
                 value={formData.birthday}
@@ -94,7 +94,17 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
               />
             </Form.Group>
             <br />
-            <input type="submit" value="Add" />
+            <style type="text/css">
+              {`
+              .btn-flat {
+                background-color: #f1b988;
+                color: white;
+              }
+              `}
+            </style>
+            <Button variant="flat" type="submit" value="Add">
+              Add
+            </Button>
           </Form>
         </Container>
       </div>

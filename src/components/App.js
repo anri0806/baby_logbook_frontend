@@ -25,16 +25,18 @@ function App() {
 
   return (
     <div>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route
-          path="/logbook"
-          element={
-            <LogbookPage babies={babies} onSubmitAddBaby={handleRenderBaby} />
-          }
-        />
-      </Routes>
-      <NavBar />
+      <div className="logbook_content">
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route
+            path="/logbook"
+            element={
+              <LogbookPage babies={babies} onSubmitAddBaby={handleRenderBaby} />
+            }
+          />
+        </Routes>
+        <NavBar />
+      </div>
     </div>
   );
 }

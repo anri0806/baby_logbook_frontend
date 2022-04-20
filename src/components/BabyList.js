@@ -5,7 +5,7 @@ function BabyList({ babies, onClickRender }) {
     <div
       key={baby.id}
       onClick={() => onClickRender(baby.id)}
-      style={{ width: "50%", textAlign: "center", display: "inline-block" }}
+      className="baby_list"
     >
       <img
         src={baby.baby_image_url}

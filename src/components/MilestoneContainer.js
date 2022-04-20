@@ -7,7 +7,7 @@ function MilestoneContainer({ milestones, onClickDeleteMile }) {
   return (
     <>
       <Table>
-        <thead>
+        <thead style={{color: "#595959"}}>
           <tr>
             <th>Date</th>
             <th>Development</th>
@@ -15,7 +15,7 @@ function MilestoneContainer({ milestones, onClickDeleteMile }) {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={{color: "#595959"}}>
           {milestones.map((milestone) => (
             <Milestone
               key={milestone.id}

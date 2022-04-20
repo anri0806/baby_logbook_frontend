@@ -7,7 +7,7 @@ function MilestoneContainer({ appointments, onClickDeleteApp }) {
   return (
     <>
       <Table>
-        <thead>
+        <thead style={{color: "#595959"}}>
           <tr>
             <th>Date</th>
             <th>Time</th>
@@ -16,7 +16,7 @@ function MilestoneContainer({ appointments, onClickDeleteApp }) {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={{color: "#595959"}}>
           {appointments.map((app) => (
             <Appointment
               key={app.id}

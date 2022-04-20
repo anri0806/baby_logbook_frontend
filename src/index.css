@@ -5,7 +5,6 @@ body {
   font-family: "Chivo", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #474747;
 }
 
 code {
@@ -32,6 +31,11 @@ code {
 
 .content {
   position: relative;
+}
+
+.logbook_content {
+  padding-bottom: 5em;
+  color: #474747;
 }
 
 .popup_box {
@@ -61,6 +65,12 @@ code {
   cursor: pointer;
 }
 
+.baby_list {
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+}
+
 .log_page {
   width: 70%;
   margin: auto;
@@ -68,7 +78,9 @@ code {
   border: 2px solid white;
   padding: 30px;
   border-radius: 18px;
+  color: #474747;
 }
+
 
 .divider {
   width: 5px;

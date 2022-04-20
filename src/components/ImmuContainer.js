@@ -7,14 +7,14 @@ function MilestoneContainer({ immunizations, onClickDeleteImm }) {
   return (
     <>
       <Table>
-        <thead>
+        <thead style={{color: "#595959"}}>
           <tr>
             <th>Date</th>
             <th>Vaccine</th>
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={{color: "#595959"}}>
           {immunizations.map((imm) => (
             <Immunization
               key={imm.id}
