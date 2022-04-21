@@ -37,7 +37,6 @@ function BabyLog({
     date: "",
   });
 
-
   //////////////////// Toggle ADD form /////////////////////
 
   function handleShowMileForm() {
@@ -131,7 +130,7 @@ function BabyLog({
         onSelect={(k) => setKey(k)}
         className="mb-3"
       >
-        <Tab eventKey="milestones" title="Milestones">  
+        <Tab eventKey="milestones" title="Milestones">
           <MilestoneContainer
             milestones={milestones}
             onClickDeleteMile={onClickDeleteMile}
@@ -165,7 +164,6 @@ function BabyLog({
                     type="text"
                     name="notes"
                     placeholder="Notes"
-                    required
                   />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridSubmit">
@@ -233,7 +231,6 @@ function BabyLog({
                     type="text"
                     name="notes"
                     placeholder="Notes"
-                    required
                   />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridSubmit">

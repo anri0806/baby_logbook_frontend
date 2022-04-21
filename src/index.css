@@ -81,6 +81,7 @@ code {
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .baby_list .icon_image_selected {
@@ -90,6 +91,7 @@ code {
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .baby_list #baby_name {

@@ -1,8 +1,6 @@
 import React from "react";
 
 function BabyList({ babies, onClickRender, isSelected, selectedBaby }) {
-  // console.log(isSelected);
-  // console.log(selectedBaby)
 
   const babyList = babies.map((baby) => (
     <div
@@ -10,7 +8,17 @@ function BabyList({ babies, onClickRender, isSelected, selectedBaby }) {
       onClick={() => onClickRender(baby.id)}
       className="baby_list"
     >
-      <img src={baby.baby_image_url} alt={baby.name} className="icon_image" />
+      <img
+        src={baby.baby_image_url}
+        alt={baby.name}
+        className={
+          isSelected
+            ? baby.id === selectedBaby.id
+              ? "icon_image_selected"
+              : "icon_image"
+            : "icon_image"
+        }
+      />
       <br />
       <p id="baby_name">{baby.name}</p>
       <div className="profile">

@@ -33,6 +33,7 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
       .then((newBaby) => onSubmitAddBaby(newBaby));
 
     setFormData({ name: "", baby_image_url: "", birthday: "" });
+    onClickClose();
   }
 
   return (

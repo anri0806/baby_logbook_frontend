@@ -28,8 +28,6 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     setSelectedBaby(baby);
     setIsSelected(true);
 
-    //onClick on img, i want to toggle className on selected element
-
     ////// GET milestone data //////
 
     fetch("http://localhost:9292/milestones")
@@ -74,8 +72,8 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
   }
 
   function handleDeleteMile(deletedMilestone) {
-    const baby = babies.find((baby) => baby.id === deletedMilestone.baby_id);
-    const updatedMilestones = baby.milestones.filter(
+
+    const updatedMilestones = selectedBabyMiles.filter(
       (mile) => mile.id !== deletedMilestone.id
     );
 
@@ -89,8 +87,8 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
   }
 
   function handleDeleteApp(deletedApp) {
-    const baby = babies.find((baby) => baby.id === deletedApp.baby_id);
-    const updatedApps = baby.appointments.filter(
+
+    const updatedApps = selectedBabyApps.filter(
       (app) => app.id !== deletedApp.id
     );
     setSelectedBabyApps(updatedApps);
@@ -103,8 +101,7 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
   }
 
   function handleDeleteImm(deletedImm) {
-    const baby = babies.find((baby) => baby.id === deletedImm.baby_id);
-    const updatedImms = baby.immunizations.filter(
+    const updatedImms = selectedBabyImms.filter(
       (imm) => imm.id !== deletedImm.id
     );
     setSelectedBabyImms(updatedImms);
