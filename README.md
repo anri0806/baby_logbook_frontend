@@ -10,14 +10,12 @@ I am a mother of 1 year old daughter and I have been using baby tracker app to t
 
 
 ## Features
-- Flags quiz game displays random flag image with four answers to choose from.  When the answer is selected by a user, it displays a message with correct answer
-- Displays a list of all the countries flags
-- Allows you to add the flag to the list
 
 - A user can add as many baby as they would like to store babies' records
 - Allows user to add milestones, doctor appointments, and immunization records
 - Allows user to delete record
 - Display records sort by date
+
 
 ## Installation
 1. Fork and clone this repository 
