@@ -28,6 +28,8 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
     setSelectedBaby(baby);
     setIsSelected(true);
 
+    //onClick on img, i want to toggle className on selected element
+
     ////// GET milestone data //////
 
     fetch("http://localhost:9292/milestones")
@@ -60,7 +62,7 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
         const selectedImms = immunizations
           .filter((imm) => imm.baby_id === babyId)
           .sort((a, b) => a.date.localeCompare(b.date));
-          
+
         setSelectedBabyImms(selectedImms);
       });
   }
@@ -134,7 +136,12 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
           onClickClose={handleCloseForm}
         />
       ) : null}
-      <BabyList babies={babies} onClickRender={handleClick} />
+      <BabyList
+        babies={babies}
+        onClickRender={handleClick}
+        isSelected={isSelected}
+        selectedBaby={selectedBaby}
+      />
       {isSelected ? (
         <BabyLog
           selectedBaby={selectedBaby}

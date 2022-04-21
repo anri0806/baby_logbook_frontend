@@ -66,9 +66,43 @@ code {
 }
 
 .baby_list {
-  width: 50%;
   text-align: center;
   display: inline-block;
+  margin-bottom: 70px;
+  padding: 0px 50px;
+}
+
+/* df6a04 */
+
+.baby_list .icon_image {
+  /* clip-path: circle(40% at 50% 50%); */
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.baby_list .icon_image_selected {
+  border: 3px solid #bc5e0bc6;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.baby_list #baby_name {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.baby_list .p2 {
+  display: inline-block;
+  font-size: 12px;
+  margin: 0;
 }
 
 .log_page {
@@ -80,7 +114,6 @@ code {
   border-radius: 18px;
   color: #474747;
 }
-
 
 .divider {
   width: 5px;

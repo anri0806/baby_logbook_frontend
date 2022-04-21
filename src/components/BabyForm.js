@@ -51,6 +51,7 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
                 onChange={handleChange}
                 name="name"
                 placeholder="Baby's name"
+                required
               />
             </Form.Group>
             <br />
@@ -60,6 +61,7 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
                 onChange={handleChange}
                 name="baby_image_url"
                 placeholder="Icon Image URL"
+                required
               />
             </Form.Group>
             <br />
@@ -70,6 +72,7 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
                 onChange={handleChange}
                 type="date"
                 name="birthday"
+                required
               />
             </Form.Group>
             <br />
@@ -82,6 +85,7 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
                 id="girl"
                 value="Girl"
                 label="Girl"
+                required
               />
               <Form.Check
                 inline
@@ -91,6 +95,7 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
                 id="boy"
                 value="Boy"
                 label="Boy"
+                required
               />
             </Form.Group>
             <br />

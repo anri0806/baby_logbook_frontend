@@ -37,6 +37,7 @@ function BabyLog({
     date: "",
   });
 
+
   //////////////////// Toggle ADD form /////////////////////
 
   function handleShowMileForm() {
@@ -123,13 +124,14 @@ function BabyLog({
 
   return (
     <div className="log_page">
+      {/* <h3>{selectedBaby.name}</h3> */}
       <Tabs
         id="controlled-tab-example"
         activeKey={key}
         onSelect={(k) => setKey(k)}
         className="mb-3"
       >
-        <Tab eventKey="milestones" title="Milestones">
+        <Tab eventKey="milestones" title="Milestones">  
           <MilestoneContainer
             milestones={milestones}
             onClickDeleteMile={onClickDeleteMile}
