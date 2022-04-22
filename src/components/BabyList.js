@@ -14,6 +14,10 @@ function BabyList({
   const [showForm, setShowForm] = useState(false);
   const [clickedBaby, setClickedBaby] = useState("");
 
+
+  
+  ///////////////////// Show & close edit form ////////////////////
+
   function handleShowForm(babyId) {
     setShowForm((showForm) => !showForm);
 
@@ -25,6 +29,10 @@ function BabyList({
     setShowForm(false);
   }
 
+
+  //////////////////////// Delete baby /////////////////////////
+
+
   function handleDeleteBaby(babyId) {
     fetch(`http://localhost:9292/babies/${babyId}`, {
       method: "DELETE",
@@ -34,6 +42,10 @@ function BabyList({
 
     onClickRemoveLog(false);
   }
+
+
+  /////////////////////// Render baby list //////////////////////
+
 
   const babyList = babies.map((baby) => (
     <div key={baby.id} className="baby_list">
@@ -70,6 +82,9 @@ function BabyList({
     </div>
   ));
 
+
+  ////////////////////////////////////////////////////////////////
+
   return (
     <>
       {babyList}
@@ -85,8 +100,3 @@ function BabyList({
 }
 
 export default BabyList;
-
-// onClick pass baby.id
-// create function to DELETE request with baby.id
-// pass deletedItem with callback from App.js
-// IN APP.JS, filter => baby.id !== deletedItem.id

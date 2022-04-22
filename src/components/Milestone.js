@@ -11,10 +11,10 @@ function Milestone({ milestone, onClickDeleteMile }) {
     })
       .then((res) => res.json())
       .then((deletedItem) => onClickDeleteMile(deletedItem));
-
   }
 
-
+  /////////////////////////////////////////////////////////
+  
 
   return (
     <>

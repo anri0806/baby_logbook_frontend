@@ -3,6 +3,9 @@ import React from "react";
 var moment = require("moment");
 
 function Appointment({ app, onClickDeleteApp }) {
+
+  
+
   /////////////////// Delete milestone /////////////////
 
   function handleDelete() {
@@ -12,6 +15,9 @@ function Appointment({ app, onClickDeleteApp }) {
       .then((res) => res.json())
       .then((deletedItem) => onClickDeleteApp(deletedItem));
   }
+
+  //////////////////////////////////////////////////////
+
 
   return (
     <>

@@ -16,7 +16,8 @@ function LogbookPage({
   const [isSelected, setIsSelected] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
-  //////////// Show/ Close form on Click ////////////
+  /////////////////// Show & close add form  //////////////////
+
 
   function handleShowForm() {
     setShowForm((showForm) => !showForm);
@@ -26,14 +27,16 @@ function LogbookPage({
     setShowForm(false);
   }
 
-  //////////// Store selected baby & its logs on Click ////////////
+
+  /////////////////// Get babies log data on Click ///////////////////
+
 
   function handleClick(babyId) {
     const baby = babies.find((baby) => baby.id === babyId);
     setSelectedBaby(baby);
     setIsSelected(true);
 
-    ////// GET milestone data //////
+    ///// GET milestone data /////
 
     fetch("http://localhost:9292/milestones")
       .then((res) => res.json())
@@ -45,7 +48,7 @@ function LogbookPage({
         setSelectedBabyMiles(selectedMiles);
       });
 
-    ////// GET appointment data //////
+    ///// GET appointment data /////
 
     fetch("http://localhost:9292/appointments")
       .then((res) => res.json())
@@ -57,7 +60,7 @@ function LogbookPage({
         setSelectedBabyApps(selectedApps);
       });
 
-    ////// GET immunization data //////
+    ///// GET immunization data /////
 
     fetch("http://localhost:9292/immunizations")
       .then((res) => res.json())
@@ -70,7 +73,10 @@ function LogbookPage({
       });
   }
 
-  //////// Milestones ////////
+ 
+  /////////////////// Render updated data on DOM ///////////////////
+
+  ///// Milestones /////
 
   function handlePostMile(newMilestone) {
     setSelectedBabyMiles([...selectedBabyMiles, newMilestone]);
@@ -84,7 +90,7 @@ function LogbookPage({
     setSelectedBabyMiles(updatedMilestones);
   }
 
-  //////// Appointments ////////
+  ///// Appointments /////
 
   function handlePostApp(newApp) {
     setSelectedBabyApps([...selectedBabyApps, newApp]);
@@ -97,7 +103,7 @@ function LogbookPage({
     setSelectedBabyApps(updatedApps);
   }
 
-  //////// Immunizations ////////
+  ///// Immunizations /////
 
   function handlePostImm(newImm) {
     setSelectedBabyImms([...selectedBabyImms, newImm]);
@@ -112,6 +118,8 @@ function LogbookPage({
 
   /////////////////////////////////////////////////////////
 
+
+  
   return (
     <div style={{ textAlign: "center" }}>
       <br />

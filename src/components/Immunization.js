@@ -1,7 +1,9 @@
 import React from "react";
 
 function Immunization({ imm, onClickDeleteImm }) {
-  ////////////////// Delete milestone /////////////////
+
+
+  ////////////////// Delete immunization /////////////////
 
   function handleDelete() {
     fetch(`http://localhost:9292/immunizations/${imm.id}`, {

@@ -8,6 +8,8 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
     birthday: "",
   });
 
+  ////////////////////// Add baby ///////////////////////
+
   function handleChange(e) {
     const name = e.target.name;
     let value = e.target.value;
@@ -35,6 +37,9 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
     setFormData({ name: "", baby_image_url: "", birthday: "" });
     onClickClose();
   }
+
+  //////////////////////////////////////////////////////
+  
 
   return (
     <div className="popup_box">

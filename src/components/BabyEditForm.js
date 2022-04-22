@@ -9,6 +9,9 @@ function BabyEditForm({ clickedBaby, onSubmitEditBaby, onClickClose }) {
     birthday: clickedBaby.birthday,
   });
 
+
+  ////////////////////// Edit baby ////////////////////
+
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
@@ -28,6 +31,9 @@ function BabyEditForm({ clickedBaby, onSubmitEditBaby, onClickClose }) {
 
     onClickClose();
   }
+
+  ///////////////////////////////////////////////////////////
+  
 
   return (
     <div className="popup_box">

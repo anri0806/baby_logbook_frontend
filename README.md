@@ -12,6 +12,7 @@ I am a mother of 1 year old daughter and I have been using baby tracker app to t
 ## Features
 
 - A user can add as many baby as they would like to store babies' records
+- A user can edit and delete baby's information
 - Allows user to add milestones, doctor appointments, and immunization records
 - Allows user to delete record
 - Display records sort by date

@@ -6,6 +6,8 @@ import NavBar from "./NavBar";
 import Home from "./Home";
 import LogbookPage from "./LogbookPage";
 
+
+
 function App() {
   const [babies, setBabies] = useState([]);
 
@@ -15,13 +17,14 @@ function App() {
       .then((data) => setBabies(data));
   }, []);
 
+
   //////////////// Render new Baby on DOM ////////////////
 
   function handleRenderBaby(newBaby) {
     setBabies([...babies, newBaby]);
   }
 
-  //////////////// Render updated Baby on DOM ////////////////
+  /////////////// Render updated Baby on DOM ///////////////
 
   function handleEditBaby(updatedItem) {
     const updatedBaby = babies.map((baby) =>
@@ -38,6 +41,8 @@ function App() {
   }
 
   //////////////////////////////////////////////////////////
+
+
 
   return (
     <div>
