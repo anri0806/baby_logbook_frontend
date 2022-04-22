@@ -3,7 +3,7 @@ import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
 
-function LogbookPage({ babies, onSubmitAddBaby }) {
+function LogbookPage({ babies, onSubmitAddBaby, onSubmitEditBaby }) {
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [selectedBabyMiles, setSelectedBabyMiles] = useState([]);
   const [selectedBabyApps, setSelectedBabyApps] = useState([]);
@@ -138,6 +138,7 @@ function LogbookPage({ babies, onSubmitAddBaby }) {
         onClickRender={handleClick}
         isSelected={isSelected}
         selectedBaby={selectedBaby}
+        onSubmitEditBaby={onSubmitEditBaby}
       />
       {isSelected ? (
         <BabyLog

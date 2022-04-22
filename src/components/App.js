@@ -21,6 +21,16 @@ function App() {
     setBabies([...babies, newBaby]);
   }
 
+  //////////////// Render updated Baby on DOM ////////////////
+
+  function handleEditBaby(updatedItem) {
+    const updatedBaby = babies.map((baby) =>
+      baby.id === updatedItem.id ? updatedItem : baby
+    );
+
+    setBabies(updatedBaby);
+  }
+
   //////////////////////////////////////////////////////////
 
   return (
@@ -31,7 +41,11 @@ function App() {
           <Route
             path="/logbook"
             element={
-              <LogbookPage babies={babies} onSubmitAddBaby={handleRenderBaby} />
+              <LogbookPage
+                babies={babies}
+                onSubmitAddBaby={handleRenderBaby}
+                onSubmitEditBaby={handleEditBaby}
+              />
             }
           />
         </Routes>

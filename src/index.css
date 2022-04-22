@@ -107,6 +107,14 @@ code {
   margin: 0;
 }
 
+.baby_list .p3{
+  display: inline-block;
+  font-size: 11px;
+  padding-top: 15px;
+  color: #bc5e0bc6;
+  cursor: pointer;
+}
+
 .log_page {
   width: 70%;
   margin: auto;
