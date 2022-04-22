@@ -3,7 +3,12 @@ import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
 
-function LogbookPage({ babies, onSubmitAddBaby, onSubmitEditBaby }) {
+function LogbookPage({
+  babies,
+  onSubmitAddBaby,
+  onSubmitEditBaby,
+  onClickDelete,
+}) {
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [selectedBabyMiles, setSelectedBabyMiles] = useState([]);
   const [selectedBabyApps, setSelectedBabyApps] = useState([]);
@@ -72,7 +77,6 @@ function LogbookPage({ babies, onSubmitAddBaby, onSubmitEditBaby }) {
   }
 
   function handleDeleteMile(deletedMilestone) {
-
     const updatedMilestones = selectedBabyMiles.filter(
       (mile) => mile.id !== deletedMilestone.id
     );
@@ -87,7 +91,6 @@ function LogbookPage({ babies, onSubmitAddBaby, onSubmitEditBaby }) {
   }
 
   function handleDeleteApp(deletedApp) {
-
     const updatedApps = selectedBabyApps.filter(
       (app) => app.id !== deletedApp.id
     );
@@ -139,6 +142,8 @@ function LogbookPage({ babies, onSubmitAddBaby, onSubmitEditBaby }) {
         isSelected={isSelected}
         selectedBaby={selectedBaby}
         onSubmitEditBaby={onSubmitEditBaby}
+        onClickDelete={onClickDelete}
+        onClickRemoveLog={setIsSelected}
       />
       {isSelected ? (
         <BabyLog

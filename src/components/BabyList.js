@@ -8,6 +8,8 @@ function BabyList({
   isSelected,
   selectedBaby,
   onSubmitEditBaby,
+  onClickDelete,
+  onClickRemoveLog,
 }) {
   const [showForm, setShowForm] = useState(false);
   const [clickedBaby, setClickedBaby] = useState("");
@@ -21,6 +23,16 @@ function BabyList({
 
   function handleCloseForm() {
     setShowForm(false);
+  }
+
+  function handleDeleteBaby(babyId) {
+    fetch(`http://localhost:9292/babies/${babyId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((deletedItem) => onClickDelete(deletedItem));
+
+    onClickRemoveLog(false);
   }
 
   const babyList = babies.map((baby) => (
@@ -51,7 +63,9 @@ function BabyList({
         <p className="p3" onClick={() => handleShowForm(baby.id)}>
           EDIT
         </p>
-        <p className="p3">/ DELETE</p>
+        <p className="p3" onClick={() => handleDeleteBaby(baby.id)}>
+          / DELETE
+        </p>
       </div>
     </div>
   ));
@@ -72,17 +86,7 @@ function BabyList({
 
 export default BabyList;
 
-// showForm ? render <BabyEditForm /> : null
-// Create state to store s baby obj
-// Add BabyEditForm.js
-// Pass clickedBaby
-// Create <Form> and controlled form
-// formData state should be =>  name: clickedBaby.name
-// !!! update backend to add patch for babies !!!
-// onSubmit, Patch request with clickedBaby.id and callback from BabyList
-// in BabyList, create function to render on DOM
-// => const updatedBabies = babies.map...baby.id === updatedItem.id ?
-// then updatedItem : babies
-
-// Create close button
-// Pop up window
+// onClick pass baby.id
+// create function to DELETE request with baby.id
+// pass deletedItem with callback from App.js
+// IN APP.JS, filter => baby.id !== deletedItem.id

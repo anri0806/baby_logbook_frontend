@@ -31,6 +31,12 @@ function App() {
     setBabies(updatedBaby);
   }
 
+  function handleDeleteBaby(deletedItem) {
+    const updatedBaby = babies.filter((baby) => baby.id !== deletedItem.id);
+
+    setBabies(updatedBaby);
+  }
+
   //////////////////////////////////////////////////////////
 
   return (
@@ -45,6 +51,7 @@ function App() {
                 babies={babies}
                 onSubmitAddBaby={handleRenderBaby}
                 onSubmitEditBaby={handleEditBaby}
+                onClickDelete={handleDeleteBaby}
               />
             }
           />
