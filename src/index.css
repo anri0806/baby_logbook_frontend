@@ -29,13 +29,20 @@ code {
   background-size: cover;
 }
 
-
 .login-form {
   background-color: white;
   margin: auto;
   margin-top: 10%;
-  padding: 40px;
+  padding: 50px 50px 80px;
   width: 40%;
+}
+
+.login-form-input {
+  margin-bottom: 20px;
+}
+
+.login-form-button {
+  width: 100%;
 }
 
 .login-signup-btn {
@@ -120,7 +127,7 @@ code {
   margin: 0;
 }
 
-.baby_list .p3{
+.baby_list .p3 {
   display: inline-block;
   font-size: 11px;
   padding-top: 15px;

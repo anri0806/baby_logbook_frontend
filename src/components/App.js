@@ -3,10 +3,32 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./Home";
+import NavBarHome from "./NavBarHome";
+import Login from "./Login";
 import LogbookPage from "./LogbookPage";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
   const [babies, setBabies] = useState([]);
+
+  ///////////// keep user logged in /////////////
+
+  // START FROM HERE
+  // Move babies useState to new compo
+  // Add tenerary to render Babylogbook.js
+
+  useEffect(() => {
+    fetch("http://localhost:9292/me").then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          console.log(user);
+          setCurrentUser(user);
+        });
+      }
+    });
+  }, []);
+
+  ///////////////////////////////////////////////////////
 
   useEffect(() => {
     fetch("http://localhost:9292/babies")
@@ -38,13 +60,13 @@ function App() {
 
   //////////////////////////////////////////////////////////
 
-  /// ADD useState to show logbook page after login
-
   return (
     <div>
       <div className="logbook_content">
+        <NavBarHome />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
           <Route
             path="/logbook"
             element={
