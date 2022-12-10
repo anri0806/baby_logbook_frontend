@@ -29,6 +29,19 @@ code {
   background-size: cover;
 }
 
+
+.login-form {
+  background-color: white;
+  margin: auto;
+  margin-top: 10%;
+  padding: 40px;
+  width: 40%;
+}
+
+.login-signup-btn {
+  margin-left: 85%;
+}
+
 .content {
   position: relative;
 }

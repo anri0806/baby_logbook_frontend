@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Navbar, Nav } from "react-bootstrap";
 
+// ADD logout link
+
 function NavBar() {
   return (
     <div>
@@ -13,9 +15,6 @@ function NavBar() {
         style={{ backgroundColor: "#f8c395", fontSize: "25px" }}
       >
         <Nav>
-          <Nav.Link style={{ marginRight: "20px" }} href="/">
-            home
-          </Nav.Link>
           <Nav.Link style={{ marginLeft: "20px" }} href="/logbook">
             logbook
           </Nav.Link>

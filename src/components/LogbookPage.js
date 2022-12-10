@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import NavBar from "./NavBar";
 import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
@@ -18,7 +19,6 @@ function LogbookPage({
 
   /////////////////// Show & close add form  //////////////////
 
-
   function handleShowForm() {
     setShowForm((showForm) => !showForm);
   }
@@ -27,9 +27,7 @@ function LogbookPage({
     setShowForm(false);
   }
 
-
   /////////////////// Get babies log data on Click ///////////////////
-
 
   function handleClick(babyId) {
     const baby = babies.find((baby) => baby.id === babyId);
@@ -73,7 +71,6 @@ function LogbookPage({
       });
   }
 
- 
   /////////////////// Render updated data on DOM ///////////////////
 
   ///// Milestones /////
@@ -118,8 +115,6 @@ function LogbookPage({
 
   /////////////////////////////////////////////////////////
 
-
-  
   return (
     <div style={{ textAlign: "center" }}>
       <br />
@@ -167,6 +162,7 @@ function LogbookPage({
           onClickDeleteImm={handleDeleteImm}
         />
       ) : null}
+      <NavBar />
     </div>
   );
 }

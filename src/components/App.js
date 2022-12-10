@@ -2,11 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import NavBar from "./NavBar";
 import Home from "./Home";
 import LogbookPage from "./LogbookPage";
-
-
 
 function App() {
   const [babies, setBabies] = useState([]);
@@ -16,7 +13,6 @@ function App() {
       .then((res) => res.json())
       .then((data) => setBabies(data));
   }, []);
-
 
   //////////////// Render new Baby on DOM ////////////////
 
@@ -42,7 +38,7 @@ function App() {
 
   //////////////////////////////////////////////////////////
 
-
+  /// ADD useState to show logbook page after login
 
   return (
     <div>
@@ -61,7 +57,6 @@ function App() {
             }
           />
         </Routes>
-        <NavBar />
       </div>
     </div>
   );
