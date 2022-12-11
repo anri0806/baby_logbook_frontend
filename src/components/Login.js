@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 
-function Login() {
+function Login({ onLogin }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -10,7 +10,6 @@ function Login() {
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +22,7 @@ function Login() {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((currentUser) => console.log(currentUser));
+      .then((currentUser) => onLogin(currentUser));
 
     setFormData({
       username: "",
