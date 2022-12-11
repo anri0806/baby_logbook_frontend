@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import LogbookPage from "./LogbookPage";
+import NavBar from "./NavBar";
 
-function LogbookContainer() {
+function LogbookContainer({ onLogout }) {
   const [babies, setBabies] = useState([]);
 
   useEffect(() => {
@@ -35,12 +37,20 @@ function LogbookContainer() {
 
   return (
     <>
-      <LogbookPage
-        babies={babies}
-        onSubmitAddBaby={handleRenderBaby}
-        onSubmitEditBaby={handleEditBaby}
-        onClickDelete={handleDeleteBaby}
-      />
+      <Routes>
+        <Route
+          path="/logbook"
+          element={
+            <LogbookPage
+              babies={babies}
+              onSubmitAddBaby={handleRenderBaby}
+              onSubmitEditBaby={handleEditBaby}
+              onClickDelete={handleDeleteBaby}
+            />
+          }
+        />
+      </Routes>
+      <NavBar onLogout={onLogout} />
     </>
   );
 }

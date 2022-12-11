@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 
-function Login({ onLogin }) {
+function Signup({ onSignup }) {
   const [formData, setFormData] = useState({
     username: "",
-    password: ""
+    password: "",
+    password_confirmation: "",
   });
 
   function handleChange(e) {
@@ -14,7 +15,7 @@ function Login({ onLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch("http://localhost:9292/login", {
+    fetch("http://localhost:9292/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,11 +23,12 @@ function Login({ onLogin }) {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((currentUser) => onLogin(currentUser));
+      .then((newUser) => onSignup(newUser));
 
     setFormData({
       username: "",
       password: "",
+      password_confirmation: "",
     });
   }
 
@@ -34,13 +36,14 @@ function Login({ onLogin }) {
     <>
       <Container>
         <Form className="login-form" onSubmit={handleSubmit}>
-          <h4>Welcome back!</h4>
+          <h4>Signup</h4>
           <br />
           <Form.Group>
             <Form.Control
               value={formData.username}
               onChange={handleChange}
               name="username"
+              type="text"
               placeholder="Username"
               className="login-form-input"
             />
@@ -50,12 +53,23 @@ function Login({ onLogin }) {
               value={formData.password}
               onChange={handleChange}
               name="password"
+              type="password"
               placeholder="Password"
               className="login-form-input"
             />
           </Form.Group>
+          <Form.Group>
+            <Form.Control
+              value={formData.password_confirmation}
+              onChange={handleChange}
+              name="password_confirmation"
+              type="password"
+              placeholder="Password confirmation"
+              className="login-form-input"
+            />
+          </Form.Group>
           <Button type="submit" className="login-form-button">
-            Login
+            Signup
           </Button>
         </Form>
       </Container>
@@ -63,4 +77,4 @@ function Login({ onLogin }) {
   );
 }
 
-export default Login;
+export default Signup;

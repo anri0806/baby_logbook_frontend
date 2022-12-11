@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import NavBar from "./NavBar";
 import BabyList from "./BabyList";
 import BabyForm from "./BabyForm";
 import BabyLog from "./BabyLog";
@@ -162,7 +161,6 @@ function LogbookPage({
           onClickDeleteImm={handleDeleteImm}
         />
       ) : null}
-      <NavBar />
     </div>
   );
 }
