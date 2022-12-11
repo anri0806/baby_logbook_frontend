@@ -4,8 +4,9 @@ import { Form, Container, Button } from "react-bootstrap";
 function Login({ onLogin }) {
   const [formData, setFormData] = useState({
     username: "",
-    password: ""
+    password: "",
   });
+  const [error, setError] = useState(null);
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,9 +21,14 @@ function Login({ onLogin }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((currentUser) => onLogin(currentUser));
+    }).then((res) => {
+      if (res.ok) {
+        console.log(res);
+        res.json().then((currentUser) => onLogin(currentUser));
+      } else {
+        res.json().then((err) => setError(err.error));
+      }
+    });
 
     setFormData({
       username: "",
@@ -41,8 +47,10 @@ function Login({ onLogin }) {
               value={formData.username}
               onChange={handleChange}
               name="username"
+              type="text"
               placeholder="Username"
               className="login-form-input"
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -50,13 +58,16 @@ function Login({ onLogin }) {
               value={formData.password}
               onChange={handleChange}
               name="password"
+              type="password"
               placeholder="Password"
               className="login-form-input"
+              required
             />
           </Form.Group>
           <Button type="submit" className="login-form-button">
             Login
           </Button>
+          {error ? <p className="error">{error}</p> : null}
         </Form>
       </Container>
     </>
