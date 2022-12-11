@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "./App";
 
-
 import LogbookPage from "./LogbookPage";
 import NavBar from "./NavBar";
 
@@ -11,21 +10,12 @@ function LogbookContainer({ onLogout }) {
 
   const currentUser = useContext(CurrentUserContext);
 
-
-  // SET user associated baby
-  // BACKEND
-  // 1. create new routes - get "/user_baby_records/:id" in Baby controller
-  //    render baby <= user_id = (params[:id])
-
-  // 2. Add user_id upon adding baby
-
-  // FRONTEND
-  // 1. GET request with currentUser.id, then set it to state
-
   useEffect(() => {
-    fetch("http://localhost:9292/babies")
+    fetch(`http://localhost:9292//current_user_records/${currentUser.id}`)
       .then((res) => res.json())
-      .then((data) => setBabies(data));
+      .then((data) => {
+        setBabies(data);
+      });
   }, []);
 
   //////////////// Render new Baby on DOM ////////////////
