@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Container, Button } from "react-bootstrap";
+import { CurrentUserContext } from "./App";
 
 function BabyForm({ onSubmitAddBaby, onClickClose }) {
+  const currentUser = useContext(CurrentUserContext);
+
   const [formData, setFormData] = useState({
     name: "",
     baby_image_url: "",
     birthday: "",
+    user_id: currentUser.id,
   });
 
   ////////////////////// Add baby ///////////////////////
@@ -39,7 +43,6 @@ function BabyForm({ onSubmitAddBaby, onClickClose }) {
   }
 
   //////////////////////////////////////////////////////
-  
 
   return (
     <div className="popup_box">

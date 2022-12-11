@@ -1,10 +1,12 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import LogbookContainer from "./LogbookContainer";
 import WelcomePage from "./WelcomePage";
+
+export const CurrentUserContext = createContext();
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -22,7 +24,7 @@ function App() {
   }, []);
 
   function handleSignup(newUser) {
-    setCurrentUser(newUser)
+    setCurrentUser(newUser);
 
     navigate("/logbook");
   }
@@ -38,16 +40,19 @@ function App() {
     navigate("/");
   }
 
-
   return (
     <div>
-      <div className="logbook_content">
-        {currentUser ? (
-          <LogbookContainer onLogout={handleLogout} />
-        ) : (
-          <WelcomePage onLogin={handleLogin} onSignup={handleSignup} />
-        )}
-      </div>
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="logbook_content">
+          {currentUser ? (
+            <LogbookContainer
+              onLogout={handleLogout}
+            />
+          ) : (
+            <WelcomePage onLogin={handleLogin} onSignup={handleSignup} />
+          )}
+        </div>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
