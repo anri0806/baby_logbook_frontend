@@ -6,7 +6,7 @@ import Appointment from "./Appointment";
 function MilestoneContainer({ appointments, onClickDeleteApp }) {
   return (
     <>
-      <Table>
+      <Table striped>
         <thead style={{color: "#595959"}}>
           <tr>
             <th>Date</th>

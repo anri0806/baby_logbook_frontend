@@ -6,7 +6,7 @@ import Immunization from "./Immunization";
 function MilestoneContainer({ immunizations, onClickDeleteImm }) {
   return (
     <>
-      <Table>
+      <Table striped>
         <thead style={{color: "#595959"}}>
           <tr>
             <th>Date</th>

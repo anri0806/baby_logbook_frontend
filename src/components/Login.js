@@ -23,7 +23,7 @@ function Login({ onLogin }) {
       body: JSON.stringify(formData),
     }).then((res) => {
       if (res.ok) {
-        console.log(res);
+        // console.log(res);
         res.json().then((currentUser) => onLogin(currentUser));
       } else {
         res.json().then((err) => setError(err.error));

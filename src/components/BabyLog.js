@@ -17,7 +17,6 @@ function BabyLog({
   onClickDeleteApp,
   onClickDeleteImm,
 }) {
-
   const [key, setKey] = useState("milestones");
   const [showMileForm, setShowMileForm] = useState(false);
   const [showAppForm, setShowAppForm] = useState(false);
@@ -37,10 +36,8 @@ function BabyLog({
     vaccine: "",
     date: "",
   });
-  
 
   //////////////////// Toggle ADD form /////////////////////
-
 
   function handleShowMileForm() {
     setShowMileForm((showMileForm) => !showMileForm);
@@ -54,9 +51,7 @@ function BabyLog({
     setShowImmForm((showImmForm) => !showImmForm);
   }
 
-
   //////////////// Add new milestone ///////////////////
-
 
   function handleMileChange(e) {
     setMileFormData({ ...mileFormData, [e.target.name]: e.target.value });
@@ -79,9 +74,7 @@ function BabyLog({
     setShowMileForm((showMileForm) => !showMileForm);
   }
 
-
   //////////////// Add new appointment ///////////////////
-
 
   function handleAppChange(e) {
     setAppFormData({ ...appFormData, [e.target.name]: e.target.value });
@@ -104,9 +97,7 @@ function BabyLog({
     setShowAppForm((showAppForm) => !showAppForm);
   }
 
-
   //////////////// Add new immunization ///////////////////
-
 
   function handleImmChange(e) {
     setImmFormData({ ...immFormData, [e.target.name]: e.target.value });
@@ -128,7 +119,6 @@ function BabyLog({
     setShowImmForm((showImmForm) => !showImmForm);
   }
 
-  
   //////////////////////////////////////////////////////////
 
   return (
@@ -139,6 +129,7 @@ function BabyLog({
         activeKey={key}
         onSelect={(k) => setKey(k)}
         className="mb-3"
+        fill
       >
         <Tab eventKey="milestones" title="Milestones">
           <MilestoneContainer
